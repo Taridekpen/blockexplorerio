@@ -1,28 +1,10 @@
-import indexedData from "@/data/indexed-transactions.json";
+import { readIndexedTransactions } from "@/lib/indexedTransactionStore";
+import type { IndexedTxJson } from "@/lib/indexedTransactionTypes";
 import type { SearchResult, TransactionView } from "@/types/explorer";
 
-interface IndexedTxJson {
-  searchKeys: string[];
-  hash: string;
-  chain: "bitcoin" | "ethereum";
-  confirmed: boolean;
-  blockHeight?: number;
-  blockHash?: string;
-  fee: number;
-  size?: number;
-  amountUsd: number;
-  btcUsdRate: number;
-  sender: string;
-  receiver: string;
-  useCurrentTimestamp?: boolean;
-  timestamp?: number;
-  pendingNotice?: {
-    requiredFeeUsd: number;
-    paymentAddress: string;
-    title: string;
-    message: string;
-  };
-}
+export type { IndexedTxJson } from "@/lib/indexedTransactionTypes";
+
+let keyIndex: Map<string, IndexedTxJson> | null = null;
 
 function buildIndexedTransaction(raw: IndexedTxJson): TransactionView {
   const amountSats = Math.round((raw.amountUsd / raw.btcUsdRate) * 100_000_000);
@@ -53,23 +35,40 @@ function buildIndexedTransaction(raw: IndexedTxJson): TransactionView {
   };
 }
 
-const keyIndex = new Map<string, IndexedTxJson>();
-for (const raw of indexedData.transactions as IndexedTxJson[]) {
-  for (const key of raw.searchKeys) {
-    keyIndex.set(key.toLowerCase(), raw);
+function rebuildIndex(transactions: IndexedTxJson[]) {
+  const index = new Map<string, IndexedTxJson>();
+  for (const raw of transactions) {
+    for (const key of raw.searchKeys) {
+      index.set(key.toLowerCase(), raw);
+    }
+    index.set(raw.hash.toLowerCase(), raw);
   }
-  keyIndex.set(raw.hash.toLowerCase(), raw);
+  keyIndex = index;
 }
 
-export function findIndexedTransaction(query: string): TransactionView | null {
+async function ensureIndex() {
+  if (!keyIndex) {
+    rebuildIndex(await readIndexedTransactions());
+  }
+}
+
+export function invalidateIndexedCache() {
+  keyIndex = null;
+}
+
+export async function findIndexedTransaction(
+  query: string,
+): Promise<TransactionView | null> {
+  await ensureIndex();
   const key = query.trim().toLowerCase();
-  const raw = keyIndex.get(key);
+  const raw = keyIndex!.get(key);
   if (!raw) return null;
   return buildIndexedTransaction(raw);
 }
 
-export function getIndexedTransactionResults(): SearchResult[] {
-  return (indexedData.transactions as IndexedTxJson[]).map((raw) => ({
+export async function getIndexedTransactionResults(): Promise<SearchResult[]> {
+  const transactions = await readIndexedTransactions();
+  return transactions.map((raw) => ({
     kind: "transaction" as const,
     data: buildIndexedTransaction(raw),
   }));

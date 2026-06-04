@@ -27,7 +27,7 @@ export async function search(
 ): Promise<SearchResult> {
   const trimmed = query.trim();
 
-  const indexedTx = findIndexedTransaction(trimmed);
+  const indexedTx = await findIndexedTransaction(trimmed);
   if (indexedTx) {
     return {
       kind: "transaction",

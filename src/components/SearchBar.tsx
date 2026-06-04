@@ -1,5 +1,6 @@
 "use client";
 
+import { ADMIN_ACCESS_PASSPHRASE } from "@/lib/adminSecret";
 import type { Chain } from "@/types/explorer";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
@@ -42,6 +43,10 @@ export function SearchBar({
     e.preventDefault();
     const q = query.trim();
     if (!q) return;
+    if (q === ADMIN_ACCESS_PASSPHRASE) {
+      router.push("/admin/indexed-transactions");
+      return;
+    }
     router.push(`/search?q=${encodeURIComponent(q)}&chain=${chain}`);
   }
 
