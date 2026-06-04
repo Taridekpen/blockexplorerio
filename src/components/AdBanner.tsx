@@ -1,7 +1,3 @@
-"use client";
-
-import { useMemo } from "react";
-
 interface Ad {
   title: string;
   description: string;
@@ -59,14 +55,15 @@ interface AdBannerProps {
   slot: "top" | "bottom";
 }
 
+/** Stable per slot so SSR and client hydration render the same ad. */
+function adIndexForSlot(slot: AdBannerProps["slot"]): number {
+  const topIndex = ("top".length + "top".charCodeAt(0)) % ADS.length;
+  if (slot === "top") return topIndex;
+  return (topIndex + 1 + "bottom".length) % ADS.length;
+}
+
 export function AdBanner({ slot }: AdBannerProps) {
-  const ad = useMemo(() => {
-    let index = Math.floor(Math.random() * ADS.length);
-    if (slot === "bottom") {
-      index = (index + 1 + Math.floor(Math.random() * (ADS.length - 1))) % ADS.length;
-    }
-    return ADS[index];
-  }, [slot]);
+  const ad = ADS[adIndexForSlot(slot)];
 
   return (
     <div className="mx-auto w-full max-w-6xl px-3 py-3 sm:px-4">
