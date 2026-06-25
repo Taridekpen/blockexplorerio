@@ -12,7 +12,7 @@
       "fee": 45800,
       "size": 248,
       "amountUsd": 42000000,
-      "btcUsdRate": 63907,
+      "ethUsdRate": 1569,
       "sender": "0xz35fhjtyj568hDGH375471ad2433A78c8F41b18ecF1",
       "receiver": "0x2B423e53BcFf69868B9f6F1Cde4bFA545dDf7c7f",
       "useCurrentTimestamp": true,
