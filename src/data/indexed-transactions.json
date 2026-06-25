@@ -28,11 +28,11 @@
         "0x2B423e53BcFf69863gejr68B9f6F1Cde4bFA545dDf7c7f5382"
       ],
       "hash": "f8c3a91d2e047b56a8c9041f6e5d7230b4a8916c7e2sy66d0498163b27c4e91h7",
-      "chain": "bitcoin",
+      "chain": "ethereum",
       "confirmed": false,
       "fee": 55440,
       "amountUsd": 40000000,
-      "ethUsdRate": 1596,
+      "ethereumUsdRate": 1596,
       "sender": "0xz35fhjtyj568hDGH375471ad2433A78c8F41b18ecF1",
       "receiver": "0x2B423e53BcFf69868B9f6F1Cde4bFA545dDf7c7f",
       "useCurrentTimestamp": true,
